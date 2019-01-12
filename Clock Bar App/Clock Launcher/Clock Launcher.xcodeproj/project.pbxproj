@@ -110,7 +110,7 @@
 				TargetAttributes = {
 					11B86E741EDEAC970069D254 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 3K68XHVR7W;
+						DevelopmentTeam = L3E88L845K;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -272,7 +272,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Clock Launcher/Clock Launcher.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3K68XHVR7W;
+				DEVELOPMENT_TEAM = L3E88L845K;
 				INFOPLIST_FILE = "Clock Launcher/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Nihalsharma.Clock-Launcher";
@@ -289,7 +289,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Clock Launcher/Clock Launcher.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3K68XHVR7W;
+				DEVELOPMENT_TEAM = L3E88L845K;
 				INFOPLIST_FILE = "Clock Launcher/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Nihalsharma.Clock-Launcher";
