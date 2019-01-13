@@ -21,12 +21,12 @@
     self = [super init];
     if (self) {
         _batteryLevel = 100.f;
-        [self setupViews];
+        [self setupLayers];
     }
     return self;
 }
 
-- (void)setupViews {
+- (void)setupLayers {
     self.wantsLayer = YES;
 
     CATransform3D textRotation = CATransform3DMakeAffineTransform(CGAffineTransformMakeRotation(M_PI_2));
@@ -58,7 +58,7 @@
 
 
 - (void)setBatteryLevel:(CGFloat)batteryLevel {
-    _batteryLevel = batteryLevel / 2.f;
+    _batteryLevel = batteryLevel;
 
     NSString *string = [NSString stringWithFormat:@"%.f%%", _batteryLevel];
 

@@ -1,32 +1,18 @@
 #import "AppDelegate.h"
 #import "TouchBar.h"
 #import <ServiceManagement/ServiceManagement.h>
-#import "TouchButton.h"
-#import "TouchDelegate.h"
 #import "TouchBarButtonViewController.h"
 #import <Cocoa/Cocoa.h>
 
-static const NSTouchBarItemIdentifier clockIdentifier = @"ns.clock";
-static NSString *const MASCustomShortcutKey = @"customShortcut";
+static const NSTouchBarItemIdentifier clockIdentifier = @"nl.koenpunt.TouchBarInfo";
 
-@interface AppDelegate () <TouchDelegate>
+@interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-NSButton *touchBarButton;
-
 @synthesize statusBar;
-
-TouchButton *button;
-
-NSString *STATUS_ICON_BLACK = @"clock-64";
-
-NSDateFormatter *timeformatter;
-NSString *format = @"hh:mm";
-NSMutableAttributedString *colorTitle;
-
 
 - (void)awakeFromNib {
     
@@ -60,7 +46,7 @@ NSMutableAttributedString *colorTitle;
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     self.statusBar.menu = self.statusMenu;
     
-    NSImage* statusImage = [self getStatusBarImage];
+    NSImage *statusImage = [self statusBarImage];
     
     statusImage.size = NSMakeSize(18, 18);
     
@@ -80,72 +66,24 @@ NSMutableAttributedString *colorTitle;
     }
 }
 
-
--(void)changeColor:(id)sender {
-    [colorTitle addAttribute:NSForegroundColorAttributeName value:sender range:NSMakeRange(0, button.title.length)];
-    [button setAttributedTitle:colorTitle];
-}
-
--(void)UpdateTime:(id)sender {
-    NSString *time  = [timeformatter stringFromDate:[NSDate date]];
-    [colorTitle.mutableString setString:time];
-    [button setAttributedTitle:colorTitle];
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[[[NSApplication sharedApplication] windows] lastObject] close];
+//    [[[[NSApplication sharedApplication] windows] lastObject] close];
 
-    DFRSystemModalShowsCloseBoxWhenFrontMost(YES);
-    
-    timeformatter = [[NSDateFormatter alloc] init];
-    [timeformatter setTimeStyle: NSDateFormatterShortStyle];
-    [timeformatter setDateFormat:format];
-    
-    NSDate *now = [NSDate date];
-    NSString *newDateString = [timeformatter stringFromDate:now];
-    
-    
-    button = [TouchButton buttonWithTitle:newDateString target:nil action:nil];
-    [button setDelegate:self];
-    
-    NSFont *systemFont = [NSFont systemFontOfSize:14.0f];
-    NSDictionary * fontAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:systemFont, NSFontAttributeName, nil];
-
-    colorTitle = [[NSMutableAttributedString alloc] initWithString:[button title] attributes:fontAttributes];
-    
-    NSString *colorString = [[NSUserDefaults standardUserDefaults] objectForKey:@"clock_color"];
-    NSColor *color = nil;
-    if (colorString == nil){
-        color = [NSColor whiteColor];
-    } else{
-        color = [self getColorForString:colorString];
-    }
-    
-    [colorTitle addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, button.title.length)];
-    [button setAttributedTitle:colorTitle];
+    DFRSystemModalShowsCloseBoxWhenFrontMost(NO);
 
     NSCustomTouchBarItem *touchBarItem = [[NSCustomTouchBarItem alloc] initWithIdentifier:clockIdentifier];
     touchBarItem.viewController = [TouchBarButtonViewController new];
 
     [NSTouchBarItem addSystemTrayItem:touchBarItem];
-//    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(UpdateTime:) userInfo:nil repeats:YES];
-
-    touchBarButton = button;
 
     DFRElementSetControlStripPresenceForIdentifier(clockIdentifier, YES);
 
     [self enableLoginAutostart];
 }
 
--(NSColor *)getColorForString:(id)sender {
-    return [self colorWithHexColorString:sender];
+- (NSImage *)statusBarImage {
+    return [NSImage imageNamed:@"clock-64"];
 }
-
-
-- (NSImage *)getStatusBarImage {
-    return [NSImage imageNamed:STATUS_ICON_BLACK];
-}
-
 
 - (void)enableLoginAutostart {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"auto_login"] == nil) {
@@ -161,59 +99,33 @@ NSMutableAttributedString *colorTitle;
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 }
 
--(double)changeState {
-    return 0;
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    DFRElementSetControlStripPresenceForIdentifier(clockIdentifier, YES);
 }
 
--(double)changeStateFixed {
-    return 0;
-}
-
--(NSColor *)colorState:(double)volume {
-    if (!volume) {
-        return NSColor.redColor;
-    } else {
-        return NSColor.clearColor;
-    }
-}
-
-- (void)onPressed:(TouchButton *)sender {
-    NSLog(@"On Press clicked");
-    if ([format isEqual:@"hh:mm"]) {
-        format = @"HH:mm";
-    } else {
-        format = @"hh:mm";
-    }
-    [timeformatter setDateFormat:format];
-}
-
-- (void)onLongPressed:(TouchButton*)sender {
+- (void)onLongPressed:(id)sender {
     [[[[NSApplication sharedApplication] windows] lastObject] makeKeyAndOrderFront:nil];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:true];
 }
 
 - (IBAction)prefsMenuItemAction:(id)sender {
-    [self onLongPressed:sender];
 }
-
 - (IBAction)quitMenuItemAction:(id)sender {
-    [NSApp terminate:nil];
 }
 
 - (NSColor*)colorWithHexColorString:(NSString*)inColorString {
     NSColor* result = nil;
     unsigned colorCode = 0;
     unsigned char redByte, greenByte, blueByte;
-    
-    if (nil != inColorString)
-    {
+
+    if (nil != inColorString) {
         NSScanner* scanner = [NSScanner scannerWithString:inColorString];
         (void)[scanner scanHexInt:&colorCode]; // ignore error
     }
     redByte = (unsigned char)(colorCode >> 16);
     greenByte = (unsigned char)(colorCode >> 8);
     blueByte = (unsigned char)(colorCode); // masks off high bits
-    
+
     result = [NSColor
               colorWithCalibratedRed:(CGFloat)redByte / 0xff
               green:(CGFloat)greenByte / 0xff

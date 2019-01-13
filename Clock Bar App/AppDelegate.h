@@ -5,16 +5,11 @@
 @property (weak) IBOutlet NSMenu *statusMenu;
 @property (strong, nonatomic) NSStatusItem *statusBar;
 
+@property (strong, nonatomic) IBOutlet NSMenuItem *prefsMenuItem;
+@property (strong, nonatomic) IBOutlet NSMenuItem *quitMenuItem;
+
 - (IBAction)prefsMenuItemAction:(id)sender;
-
 - (IBAction)quitMenuItemAction:(id)sender;
-
-@property (weak) IBOutlet NSMenuItem *muteMenuItem;
-
-- (void) hideMenuBar:(BOOL)enableState;
-- (void) changeColor:(id)sender;
-- (NSColor*)colorWithHexColorString:(NSString*)inColorString;
-
 
 @end
 

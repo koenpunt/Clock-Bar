@@ -2,34 +2,11 @@
 
 #import "TouchBarButtonView.h"
 #import "BatteryView.h"
-
-@interface ColoredView : NSView
-
-@property NSColor *backgroundColor;
-
-@end
-
-@implementation ColoredView
-
-- (instancetype)initWithBackgroundColor:(NSColor *)backgroundColor {
-    self = [super init];
-    if (self) {
-        _backgroundColor = backgroundColor;
-    }
-    return self;
-}
-
-
-- (void)drawRect:(NSRect)dirtyRect {
-    [_backgroundColor setFill];
-    NSRectFill(dirtyRect);
-    [super drawRect:dirtyRect];
-}
-
-@end
+#import "ClockView.h"
 
 @implementation TouchBarButtonView {
     BatteryView *_batteryView;
+    ClockView *_clockView;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
@@ -45,12 +22,15 @@
 
 - (void)setupViews {
     _batteryView = [BatteryView new];
-
     [self addSubview:_batteryView];
+
+    _clockView = [ClockView new];
+    [self addSubview:_clockView];
 }
 
 - (void)setupConstraints {
     _batteryView.translatesAutoresizingMaskIntoConstraints = NO;
+
     [NSLayoutConstraint activateConstraints:
      @[
        [_batteryView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
@@ -58,6 +38,20 @@
        [_batteryView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
        [_batteryView.widthAnchor constraintEqualToConstant:12.f]]
      ];
+}
+
+- (void)layout {
+    [super layout];
+
+    CGFloat touchBarButtonBorder = 2.f;
+
+    CGRect clockFrame = self.bounds;
+    clockFrame.size.height = clockFrame.size.height;
+    clockFrame.size.width = clockFrame.size.width - 12.f - touchBarButtonBorder;
+    clockFrame.origin.x = 12.f;
+    clockFrame.origin.y = 0;
+
+    _clockView.frame = clockFrame;
 }
 
 - (void)setBatteryLevel:(CGFloat)batteryLevel {

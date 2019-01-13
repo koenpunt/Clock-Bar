@@ -69,8 +69,8 @@ static void *MASObservingContext = &MASObservingContext;
     [[NSUserDefaults standardUserDefaults] setBool:enableState forKey:@"hide_status_bar"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    [appDelegate hideMenuBar:enableState];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    [appDelegate hideMenuBar:enableState];
 
     
     if (enableState == YES) {
@@ -87,49 +87,45 @@ static void *MASObservingContext = &MASObservingContext;
 
 
 - (IBAction)whiteButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"FFFFFF"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"FFFFFF" forKey:@"clock_color"];
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"FFFFFF"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"FFFFFF" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 - (IBAction)greenButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"00FF00"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"00FF00" forKey:@"clock_color"];
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"00FF00"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"00FF00" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 - (IBAction)pinkButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"FE69F3"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"FE69F3" forKey:@"clock_color"];
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"FE69F3"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"FE69F3" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 - (IBAction)redButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"FF0000"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"FF00000" forKey:@"clock_color"];
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"FF0000"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"FF00000" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 - (IBAction)yellowButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"FFFF00"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"FFFF00" forKey:@"clock_color"];
-    
-    
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"FFFF00"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"FFFF00" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 - (IBAction)blueButtonClicked:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
-    NSColor *color = [appDelegate colorWithHexColorString:@"30E6FF"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"30E6FF" forKey:@"clock_color"];
-    
-    
-    [appDelegate changeColor:color];
+//    AppDelegate *appDelegate = (AppDelegate *) [[NSApplication sharedApplication] delegate];
+//    NSColor *color = [appDelegate colorWithHexColorString:@"30E6FF"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"30E6FF" forKey:@"clock_color"];
+//    [appDelegate changeColor:color];
 }
 
 
